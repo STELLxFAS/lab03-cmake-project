@@ -1,28 +1,26 @@
 version: 1.0.{build}
- 
+
 image: Visual Studio 2019
- 
+
 platform:
   - x64
-  - x86
- 
+
 configuration:
   - Debug
   - Release
- 
+
 before_build:
   - mkdir build
   - cd build
-  - if "%platform%"=="x64" (cmake .. -G "Visual Studio 16 2019" -A x64)
-  - if "%platform%"=="x86" (cmake .. -G "Visual Studio 16 2019" -A Win32)
- 
+  - cmake .. -G "Visual Studio 16 2019" -A x64
+
 build:
   project: build/FormatterInc.sln
   parallel: true
   verbosity: minimal
- 
+
 test: off
- 
+
 artifacts:
   - path: build\bin\$(configuration)\*.exe
     name: executables
